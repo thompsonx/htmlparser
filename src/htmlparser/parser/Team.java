@@ -10,11 +10,12 @@ package htmlparser.parser;
  * @author Tom
  */
 public class Team {
-    private String score;
+    private String name, score;
     private int matches, wins, draws, losses, points;
     
     
-    public Team(int matches, int wins, int draws, int losses, String score, int points) {
+    public Team(String name, int matches, int wins, int draws, int losses, String score, int points) {
+        this.name = name;
         this.matches = matches;
         this.wins = wins;
         this.draws = draws;
@@ -26,7 +27,7 @@ public class Team {
     @Override
     public String toString() {
         
-        String info = Integer.toString(matches) + ","
+        String info = name + "," + Integer.toString(matches) + ","
                 + Integer.toString(wins) + "," + Integer.toString(draws)
                 + "," + Integer.toString(losses) + "," + score + ","
                 + Integer.toString(points);

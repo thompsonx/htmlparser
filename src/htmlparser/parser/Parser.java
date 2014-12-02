@@ -6,7 +6,7 @@
 package htmlparser.parser;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;
@@ -21,7 +21,7 @@ import org.jsoup.select.Elements;
 public class Parser {
     
     private Elements data;
-    private HashMap<String, Team> teams;
+    private ArrayList<Team> teams;
     private String competition_name;
     
     public Parser(String url) {
@@ -39,7 +39,7 @@ public class Parser {
         
         this.data = this.cleanPage(doc);
         
-        this.teams = new HashMap<>();
+        this.teams = new ArrayList<>();
         
         this.createTeams();
         
@@ -80,16 +80,16 @@ public class Parser {
             String score = cells.get(6).text();
             int points = Integer.parseInt(cells.get(7).text());
             
-            Team t = new Team(matches, wins, draws, losses, score, points);
+            Team t = new Team(name, matches, wins, draws, losses, score, points);
             
-            this.teams.put(name, t);
+            this.teams.add(t);
             
             System.out.println(t);
         }
         
     }
     
-    public HashMap<String, Team> getTeams() {
+    public ArrayList<Team> getTeams() {
         
         return this.teams;
         
