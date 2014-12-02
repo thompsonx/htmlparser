@@ -72,15 +72,19 @@ public class Parser {
         for(Element e: this.data) {
             Elements cells = e.getElementsByTag("td");
             
-            String name = cells.get(1).text();
-            int matches = Integer.parseInt(cells.get(2).text());
-            int wins = Integer.parseInt(cells.get(3).text());
-            int draws = Integer.parseInt(cells.get(4).text());
-            int losses = Integer.parseInt(cells.get(5).text());
-            String score = cells.get(6).text();
-            int points = Integer.parseInt(cells.get(7).text());
+            cells.remove(0);
+            cells.remove(cells.last());
+            cells.remove(cells.last());
             
-            Team t = new Team(name, matches, wins, draws, losses, score, points);
+            ArrayList<String> team = new ArrayList<>();
+            
+            for (Element ce: cells) {
+                
+                team.add(ce.text());
+                
+            }
+            
+            Team t = new Team(team);
             
             this.teams.add(t);
             
