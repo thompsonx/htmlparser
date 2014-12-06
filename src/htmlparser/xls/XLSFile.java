@@ -162,12 +162,12 @@ public class XLSFile {
         
     }
     
-    public void saveXLSFile(String filepath) {
+    public void saveXLSFile() {
         
         FileOutputStream output = null;
         
         try {
-            output = new FileOutputStream(filepath);
+            output = new FileOutputStream(this.parser.getCompetitionName() + ".xlsx");
         } catch (FileNotFoundException ex) {
             
         }

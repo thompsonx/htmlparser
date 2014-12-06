@@ -41,8 +41,6 @@ public class Parser {
         
         this.teams = new ArrayList<>();
         
-        this.createTeams();
-        
     }
     
     private Elements cleanPage(Document doc) {
@@ -67,7 +65,7 @@ public class Parser {
         return data;
     }
     
-    private void createTeams() {
+    public void createTeams() {
         
         for(Element e: this.data) {
             Elements cells = e.getElementsByTag("td");
