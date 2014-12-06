@@ -47,11 +47,22 @@ public class Controller {
         
     }
     
-    public void saveFile() {
+    public void saveFile(String highlight) {
         
         XLSFile f = new XLSFile(this.parser, null);
         
-        f.createScoreTable(IndexedColors.ORANGE.getIndex(), IndexedColors.RED.getIndex(), IndexedColors.WHITE.getIndex());
+        int teamno = -1;
+        
+        if (highlight != null) {
+            for (String s: this.teams) {
+                if (highlight.equals(s)) {
+                    teamno = this.teams.indexOf(s);
+                    break;
+                }
+            }
+        }
+        
+        f.createScoreTable(IndexedColors.ORANGE.getIndex(), IndexedColors.RED.getIndex(), IndexedColors.WHITE.getIndex(), teamno);
         
         f.saveXLSFile();
         

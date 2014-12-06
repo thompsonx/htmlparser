@@ -48,7 +48,7 @@ public class XLSFile {
        
     }
     
-    public void createScoreTable(short oddrow_color, short title_bg_color, short title_font_color) {
+    public void createScoreTable(short oddrow_color, short title_bg_color, short title_font_color, int highlight) {
         
         String sheetname = WorkbookUtil.createSafeSheetName(this.parser.getCompetitionName());
         this.scoresheet = this.excelfile.createSheet(sheetname);
@@ -155,6 +155,21 @@ public class XLSFile {
             
         }
         
+        if (highlight >= 0) {
+            
+            highlight += 2;
+            
+            Row r = this.scoresheet.getRow(highlight);
+            customstyle = this.excelfile.createCellStyle();
+            customstyle.cloneStyleFrom(r.getCell(0).getCellStyle());
+            Font bold = this.excelfile.createFont();
+            bold.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            customstyle.setFont(bold);
+            
+            for (Cell c: r) {
+                c.setCellStyle(customstyle);
+            }
+        }
         
     }
     

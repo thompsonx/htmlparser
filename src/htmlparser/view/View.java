@@ -139,7 +139,15 @@ public class View extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         
-        this.controller.saveFile();
+        String selected = null;
+        
+        if (this.highlightChecked) {
+            
+            selected = (String) this.teamsBox.getSelectedItem();
+            
+        }
+        
+        this.controller.saveFile(selected);
         
     }//GEN-LAST:event_saveButtonActionPerformed
     
