@@ -21,6 +21,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.ss.util.WorkbookUtil;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -48,7 +51,7 @@ public class XLSFile {
        
     }
     
-    public void createScoreTable(short oddrow_color, short title_bg_color, short title_font_color, int highlight) {
+    public void createScoreTable(XSSFColor oddrow_color, XSSFColor title_bg_color, XSSFColor title_font_color, int highlight) {
         
         String sheetname = WorkbookUtil.createSafeSheetName(this.parser.getCompetitionName());
         this.scoresheet = this.excelfile.createSheet(sheetname);
@@ -72,9 +75,9 @@ public class XLSFile {
         Row headline = this.scoresheet.createRow(rows);
         Cell cheadline = headline.createCell(0);
         cheadline.setCellValue(createHelper.createRichTextString(this.parser.getCompetitionName()));
-        CellStyle customstyle = this.excelfile.createCellStyle();
+        XSSFCellStyle customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
         customstyle.cloneStyleFrom(cellStyle);
-        Font fh = this.excelfile.createFont();
+        XSSFFont fh = (XSSFFont) this.excelfile.createFont();
         fh.setFontHeightInPoints((short) 16);
         fh.setBoldweight(Font.BOLDWEIGHT_BOLD);
         fh.setColor(title_bg_color);
@@ -94,11 +97,11 @@ public class XLSFile {
         rows++;
         
         Row colNms = this.scoresheet.createRow(rows++);
-        customstyle = this.excelfile.createCellStyle();
+        customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
         customstyle.cloneStyleFrom(cellStyle);
         customstyle.setFillForegroundColor(title_bg_color);
         customstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        Font f1 = this.excelfile.createFont();
+        XSSFFont f1 = (XSSFFont) this.excelfile.createFont();
         f1.setColor(title_font_color);
         f1.setBoldweight(Font.BOLDWEIGHT_BOLD);
         customstyle.setFont(f1);
@@ -114,7 +117,7 @@ public class XLSFile {
         
         double ordNum = 1;
         
-        customstyle = this.excelfile.createCellStyle();
+        customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
         customstyle.cloneStyleFrom(cellStyle);
         customstyle.setFillForegroundColor(oddrow_color);
         customstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
@@ -160,7 +163,7 @@ public class XLSFile {
             highlight += 2;
             
             Row r = this.scoresheet.getRow(highlight);
-            customstyle = this.excelfile.createCellStyle();
+            customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
             customstyle.cloneStyleFrom(r.getCell(0).getCellStyle());
             Font bold = this.excelfile.createFont();
             bold.setBoldweight(Font.BOLDWEIGHT_BOLD);

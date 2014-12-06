@@ -6,8 +6,9 @@
 package htmlparser.view;
 
 import htlmparser.control.Controller;
+import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -27,6 +28,13 @@ public class View extends javax.swing.JFrame {
         this.highlightChecked = false;
         this.teamsBox.setVisible(false);
         this.saveButton.setVisible(false);
+        this.color1.setVisible(false);
+        this.color2.setVisible(false);
+        this.font.setVisible(false);
+        this.colorsLabel.setVisible(false);
+        this.color1Label.setVisible(false);
+        this.color2Label.setVisible(false);
+        this.color3Label.setVisible(false);
     }
 
     /**
@@ -43,6 +51,13 @@ public class View extends javax.swing.JFrame {
         teamHighlight = new javax.swing.JCheckBox();
         teamsBox = new javax.swing.JComboBox();
         saveButton = new javax.swing.JButton();
+        color1 = new javax.swing.JButton();
+        color2 = new javax.swing.JButton();
+        font = new javax.swing.JButton();
+        colorsLabel = new javax.swing.JLabel();
+        color1Label = new javax.swing.JLabel();
+        color2Label = new javax.swing.JLabel();
+        color3Label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,6 +96,38 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        color1.setText("Odd row");
+        color1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                color1ActionPerformed(evt);
+            }
+        });
+
+        color2.setText("Titles background");
+        color2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                color2ActionPerformed(evt);
+            }
+        });
+
+        font.setText("Titles font");
+        font.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fontActionPerformed(evt);
+            }
+        });
+
+        colorsLabel.setText("Choose colors:");
+
+        color1Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        color1Label.setOpaque(true);
+
+        color2Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        color2Label.setOpaque(true);
+
+        color3Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        color3Label.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,16 +135,35 @@ public class View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(teamHighlight)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(urlField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(urlSubmit))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(saveButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(font)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(color1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(color2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(urlField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(urlSubmit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(teamHighlight)
+                                .addGap(117, 117, 117)
+                                .addComponent(colorsLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(149, 149, 149)
+                                .addComponent(saveButton)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,12 +173,29 @@ public class View extends javax.swing.JFrame {
                     .addComponent(urlField)
                     .addComponent(urlSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(teamHighlight)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teamHighlight)
+                    .addComponent(colorsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(color1)
+                            .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(color2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(font))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(saveButton)
-                .addGap(57, 57, 57))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -150,10 +233,47 @@ public class View extends javax.swing.JFrame {
         this.controller.saveFile(selected);
         
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
+        
+        Color c = JColorChooser.showDialog(null, "Choose a Color", this.getForeground());
+        if (c != null) {
+            this.controller.setColor1(c);
+            this.color1Label.setBackground(c);
+        }
+        
+    }//GEN-LAST:event_color1ActionPerformed
+
+    private void color2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2ActionPerformed
+        
+        Color c = JColorChooser.showDialog(null, "Choose a Color", this.getForeground());
+        if (c != null) {
+            this.controller.setColor2(c);
+            this.color2Label.setBackground(c);
+        }
+        
+    }//GEN-LAST:event_color2ActionPerformed
+
+    private void fontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fontActionPerformed
+        
+        Color c = JColorChooser.showDialog(null, "Choose a Color", this.getForeground());
+        if (c != null) {
+            this.controller.setColor3(c);
+            this.color3Label.setBackground(c);
+        }
+        
+    }//GEN-LAST:event_fontActionPerformed
     
     public void urlSuccess() {
         this.teamHighlight.setVisible(true);
         this.saveButton.setVisible(true);
+        this.color1.setVisible(true);
+        this.color2.setVisible(true);
+        this.font.setVisible(true);
+        this.colorsLabel.setVisible(true);
+        this.color1Label.setVisible(true);
+        this.color2Label.setVisible(true);
+        this.color3Label.setVisible(true);
     }
     
     public void fillTeams(ArrayList<String> teams) {
@@ -162,6 +282,13 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton color1;
+    private javax.swing.JLabel color1Label;
+    private javax.swing.JButton color2;
+    private javax.swing.JLabel color2Label;
+    private javax.swing.JLabel color3Label;
+    private javax.swing.JLabel colorsLabel;
+    private javax.swing.JButton font;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox teamHighlight;
     private javax.swing.JComboBox teamsBox;
