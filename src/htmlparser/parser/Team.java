@@ -26,6 +26,12 @@ public class Team {
         }
     }
     
+    public ArrayList<String> getData() {
+        
+        return this.data;
+        
+    }
+    
     @Override
     public String toString() {
         

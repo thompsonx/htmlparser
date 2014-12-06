@@ -6,6 +6,8 @@
 package htmlparser;
 
 import htmlparser.parser.Parser;
+import htmlparser.xls.XLSFile;
+import org.apache.poi.ss.usermodel.IndexedColors;
 
 /**
  *
@@ -19,6 +21,12 @@ public class Htmlparser {
     public static void main(String[] args) {
         
         Parser p = new Parser("http://nv.fotbal.cz/domaci-souteze/kao/moravskoslezsky/opava/souteze.asp?soutez=815A1A");
+        
+        XLSFile f = new XLSFile(p, null);
+        
+        f.createScoreTable(IndexedColors.ORANGE.getIndex(), IndexedColors.RED.getIndex(), IndexedColors.WHITE.getIndex());
+        
+        f.saveXLSFile("file.xlsx");
         
     }
     
