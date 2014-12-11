@@ -39,7 +39,7 @@ public class Team {
         
         for (String s: this.data) {
             
-            str.append(s + " ");
+            str.append(s).append(" ");
             
         }
         

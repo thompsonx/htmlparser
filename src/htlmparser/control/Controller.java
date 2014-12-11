@@ -7,6 +7,7 @@ package htlmparser.control;
 
 import htmlparser.parser.Parser;
 import htmlparser.parser.Team;
+import htmlparser.pdf.PDFFile;
 import htmlparser.view.View;
 import htmlparser.xls.XLSFile;
 import java.awt.Color;
@@ -22,7 +23,7 @@ public class Controller {
     private View view;
     private Parser parser;
     private ArrayList<String> teams;
-    private XSSFColor oddrow_color, title_bg_color, title_font_color;
+    private Color oddrow_color, title_bg_color, title_font_color;
     
     public void setView(View v) {
         
@@ -52,6 +53,7 @@ public class Controller {
     public void saveFile(String highlight) {
         
         XLSFile f = new XLSFile(this.parser, null);
+        PDFFile pdf = new PDFFile(this.parser, null);
         
         int teamno = -1;
         
@@ -64,9 +66,11 @@ public class Controller {
             }
         }
         
-        f.createScoreTable(this.oddrow_color, this.title_bg_color, this.title_font_color, teamno);
+        f.createScoreTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color), teamno);
+        pdf.createScoreTable(oddrow_color, title_bg_color, title_font_color, teamno);
         
         f.saveXLSFile();
+        pdf.closeFile();
         
     }
     
@@ -84,19 +88,19 @@ public class Controller {
     
     public void setColor1(Color c) {
       
-        this.oddrow_color = new XSSFColor(c);
+        this.oddrow_color = c;
         
     }
     
     public void setColor2(Color c) {
 
-        this.title_bg_color = new XSSFColor(c);
+        this.title_bg_color = c;
       
     }
     
     public void setColor3(Color c) {
 
-        this.title_font_color = new XSSFColor(c);
+        this.title_font_color = c;
 
     }
     
