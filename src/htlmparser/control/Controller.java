@@ -50,11 +50,8 @@ public class Controller {
         
     }
     
-    public void saveFile(String highlight) {
-        
-        XLSFile f = new XLSFile(this.parser, null);
-        PDFFile pdf = new PDFFile(this.parser, null);
-        
+    public void saveFile(String highlight, boolean toxlsx, boolean topdf) {
+
         int teamno = -1;
         
         if (highlight != null) {
@@ -66,11 +63,21 @@ public class Controller {
             }
         }
         
-        f.createScoreTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color), teamno);
-        pdf.createScoreTable(oddrow_color, title_bg_color, title_font_color, teamno);
+        if (toxlsx) {
+            
+            XLSFile f = new XLSFile(this.parser, null);
+            f.createScoreTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color), teamno);
+            f.saveXLSFile();
+            
+        }
         
-        f.saveXLSFile();
-        pdf.closeFile();
+        if (topdf) {
+            
+            PDFFile pdf = new PDFFile(this.parser, null);
+            pdf.createScoreTable(oddrow_color, title_bg_color, title_font_color, teamno);
+            pdf.closeFile();
+            
+        }
         
     }
     

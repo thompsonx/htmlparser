@@ -17,7 +17,6 @@ import javax.swing.JColorChooser;
 public class View extends javax.swing.JFrame {
     
     private Controller controller;
-    private boolean highlightChecked;
     
     public View(Controller c) {
         initComponents();
@@ -25,7 +24,6 @@ public class View extends javax.swing.JFrame {
         this.controller = c;
         
         this.teamHighlight.setVisible(false);
-        this.highlightChecked = false;
         this.teamsBox.setVisible(false);
         this.saveButton.setVisible(false);
         this.color1.setVisible(false);
@@ -35,6 +33,11 @@ public class View extends javax.swing.JFrame {
         this.color1Label.setVisible(false);
         this.color2Label.setVisible(false);
         this.color3Label.setVisible(false);
+        this.excelBox.setVisible(false);
+        this.pdfBox.setVisible(false);
+        
+        this.teamsBox.setEnabled(false);
+        this.saveButton.setEnabled(false);
     }
 
     /**
@@ -58,6 +61,8 @@ public class View extends javax.swing.JFrame {
         color1Label = new javax.swing.JLabel();
         color2Label = new javax.swing.JLabel();
         color3Label = new javax.swing.JLabel();
+        excelBox = new javax.swing.JCheckBox();
+        pdfBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -128,6 +133,20 @@ public class View extends javax.swing.JFrame {
         color3Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color3Label.setOpaque(true);
 
+        excelBox.setText("Save as Excel");
+        excelBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excelBoxActionPerformed(evt);
+            }
+        });
+
+        pdfBox.setText("Save as PDF");
+        pdfBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pdfBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +180,10 @@ public class View extends javax.swing.JFrame {
                                 .addGap(117, 117, 117)
                                 .addComponent(colorsLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
+                                .addComponent(excelBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pdfBox)
+                                .addGap(18, 18, 18)
                                 .addComponent(saveButton)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -193,9 +215,12 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(excelBox)
+                    .addComponent(pdfBox)
+                    .addComponent(saveButton))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -210,13 +235,11 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_urlFieldMouseClicked
 
     private void teamHighlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamHighlightActionPerformed
-        if (this.highlightChecked) {
-            this.highlightChecked = false;
-            this.teamsBox.setVisible(false);
+        if (this.teamHighlight.isSelected()) {
+            this.teamsBox.setEnabled(true);
         }
         else {
-            this.highlightChecked = true;
-            this.teamsBox.setVisible(true);
+            this.teamsBox.setEnabled(false);
         }
     }//GEN-LAST:event_teamHighlightActionPerformed
 
@@ -224,13 +247,21 @@ public class View extends javax.swing.JFrame {
         
         String selected = null;
         
-        if (this.highlightChecked) {
+        if (this.teamHighlight.isSelected()) {
             
             selected = (String) this.teamsBox.getSelectedItem();
             
         }
         
-        this.controller.saveFile(selected);
+        if (this.excelBox.isSelected() && this.pdfBox.isSelected()) {
+            this.controller.saveFile(selected, true, true);
+        }
+        else if (this.excelBox.isSelected() && !this.pdfBox.isSelected()) {
+            this.controller.saveFile(selected, true, false);
+        }
+        else if (!this.excelBox.isSelected() && this.pdfBox.isSelected()) {
+            this.controller.saveFile(selected, false, true);
+        }
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -263,9 +294,28 @@ public class View extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_fontActionPerformed
+
+    private void excelBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excelBoxActionPerformed
+        if (this.excelBox.isSelected()) {
+            this.saveButton.setEnabled(true);
+        }
+        else if(!this.excelBox.isSelected() && !this.pdfBox.isSelected()) {
+            this.saveButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_excelBoxActionPerformed
+
+    private void pdfBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pdfBoxActionPerformed
+        if (this.pdfBox.isSelected()) {
+            this.saveButton.setEnabled(true);
+        }
+        else if(!this.pdfBox.isSelected() && !this.excelBox.isSelected()) {
+            this.saveButton.setEnabled(false);
+        }
+    }//GEN-LAST:event_pdfBoxActionPerformed
     
     public void urlSuccess() {
         this.teamHighlight.setVisible(true);
+        this.teamsBox.setVisible(true);
         this.saveButton.setVisible(true);
         this.color1.setVisible(true);
         this.color2.setVisible(true);
@@ -274,6 +324,8 @@ public class View extends javax.swing.JFrame {
         this.color1Label.setVisible(true);
         this.color2Label.setVisible(true);
         this.color3Label.setVisible(true);
+        this.excelBox.setVisible(true);
+        this.pdfBox.setVisible(true);
     }
     
     public void fillTeams(ArrayList<String> teams) {
@@ -288,7 +340,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel color2Label;
     private javax.swing.JLabel color3Label;
     private javax.swing.JLabel colorsLabel;
+    private javax.swing.JCheckBox excelBox;
     private javax.swing.JButton font;
+    private javax.swing.JCheckBox pdfBox;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox teamHighlight;
     private javax.swing.JComboBox teamsBox;
