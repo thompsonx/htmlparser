@@ -5,6 +5,7 @@
  */
 package htmlparser.xls;
 
+import htmlparser.parser.Match;
 import htmlparser.parser.Parser;
 import htmlparser.parser.Team;
 import java.io.FileNotFoundException;
@@ -36,15 +37,14 @@ public class XLSFile {
     private Sheet scoresheet;
     private Sheet matchsheet;
     private Parser parser;
-    private String team;
     private final String[] shColNms = {"Pořadí", "Tým", "Zápasů", "+", "0", "-", "Skóre", "Body"};
+    private final String[] mhColNms = {"Domácí", "Hosté", "Termín", "Den", "Hřiště"};
     
-    public XLSFile(Parser parser, String team) {
+    public XLSFile(Parser parser) {
         
         this.parser = parser;
         this.excelfile = new XSSFWorkbook();
         
-        this.team = team;
         
         this.scoresheet = null;
         this.matchsheet = null;
@@ -176,7 +176,103 @@ public class XLSFile {
         
     }
     
-    public void createMatchTable() {
+    public void createMatchTable(XSSFColor oddrow_color, XSSFColor title_bg_color, XSSFColor title_font_color) {
+        
+        String sheetname = WorkbookUtil.createSafeSheetName(this.parser.getTeamName());
+        this.matchsheet = this.excelfile.createSheet(sheetname);
+        
+        CreationHelper createHelper = this.excelfile.getCreationHelper();
+        
+        CellStyle cellStyle = this.excelfile.createCellStyle();
+        cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+        cellStyle.setBorderBottom(CellStyle.BORDER_THIN);
+        cellStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        cellStyle.setBorderLeft(CellStyle.BORDER_THIN);
+        cellStyle.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        cellStyle.setBorderRight(CellStyle.BORDER_THIN);
+        cellStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        cellStyle.setBorderTop(CellStyle.BORDER_THIN);
+        cellStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        
+        
+        int rows = 0;
+        
+        Row headline = this.matchsheet.createRow(rows);
+        Cell cheadline = headline.createCell(0);
+        cheadline.setCellValue(createHelper.createRichTextString(this.parser.getTeamName()));
+        XSSFCellStyle customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
+        customstyle.cloneStyleFrom(cellStyle);
+        XSSFFont fh = (XSSFFont) this.excelfile.createFont();
+        fh.setFontHeightInPoints((short) 16);
+        fh.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        fh.setColor(title_bg_color);
+        customstyle.setFont(fh);
+        cheadline.setCellStyle(customstyle);
+        int length = this.parser.getMatches().get(0).getData().size();
+        CellRangeAddress headrow = new CellRangeAddress(rows, rows, 0, length - 1);
+        this.matchsheet.addMergedRegion(headrow);
+        RegionUtil.setBorderBottom(CellStyle.BORDER_THIN, headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setBottomBorderColor(IndexedColors.BLACK.getIndex(), headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setBorderLeft(CellStyle.BORDER_THIN, headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setLeftBorderColor(IndexedColors.BLACK.getIndex(), headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setBorderRight(CellStyle.BORDER_THIN, headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setRightBorderColor(IndexedColors.BLACK.getIndex(), headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setBorderTop(CellStyle.BORDER_THIN, headrow, this.matchsheet, this.excelfile);
+        RegionUtil.setTopBorderColor(IndexedColors.BLACK.getIndex(), headrow, this.matchsheet, this.excelfile);
+        rows++;
+        
+        Row colNms = this.matchsheet.createRow(rows++);
+        customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
+        customstyle.cloneStyleFrom(cellStyle);
+        customstyle.setFillForegroundColor(title_bg_color);
+        customstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        XSSFFont f1 = (XSSFFont) this.excelfile.createFont();
+        f1.setColor(title_font_color);
+        f1.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        customstyle.setFont(f1);
+        int cCN = 0;
+        for (String s: this.mhColNms) {
+            
+            Cell c = colNms.createCell(cCN);
+            c.setCellValue(createHelper.createRichTextString(s));
+            c.setCellStyle(customstyle);
+            cCN++;
+            
+        }
+        
+        customstyle = (XSSFCellStyle) this.excelfile.createCellStyle();
+        customstyle.cloneStyleFrom(cellStyle);
+        customstyle.setFillForegroundColor(oddrow_color);
+        customstyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        
+        for (Match t: this.parser.getMatches()) {
+            
+            Row r = this.matchsheet.createRow(rows++);
+            
+            int cell = 0;
+            
+            for (String s: t.getData()) {
+                
+                Cell c = r.createCell(cell);
+                
+                c.setCellValue( createHelper.createRichTextString(s) );
+                
+                if (rows % 2 == 0)
+                    c.setCellStyle(customstyle);
+                else
+                    c.setCellStyle(cellStyle);
+                
+                cell++;
+               
+            }
+            
+        }
+        
+        for (int i = 0; i < length; i++) {
+            
+            this.matchsheet.autoSizeColumn(i);
+            
+        }
         
     }
     

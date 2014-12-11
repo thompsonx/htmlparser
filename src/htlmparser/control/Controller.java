@@ -25,13 +25,22 @@ public class Controller {
     private ArrayList<String> teams;
     private Color oddrow_color, title_bg_color, title_font_color;
     
+    public Controller() {
+        
+        this.oddrow_color = new Color(75,195,248);
+        this.title_bg_color = new Color(38,169,247);
+        this.title_font_color = new Color(202,65,47);
+        
+    }
+    
+    
     public void setView(View v) {
         
         this.view = v;
         
     }
     
-    public void getURL(String url) {
+    public void setURL(String url) {
         
         System.out.println(url);
         
@@ -50,7 +59,7 @@ public class Controller {
         
     }
     
-    public void saveFile(String highlight, boolean toxlsx, boolean topdf) {
+    public void saveFile(String highlight, boolean toxlsx, boolean topdf, String team) {
 
         int teamno = -1;
         
@@ -63,18 +72,35 @@ public class Controller {
             }
         }
         
+        if (team != null) {
+            
+            this.parser.createMatches(team);
+            
+        }
+        
         if (toxlsx) {
             
-            XLSFile f = new XLSFile(this.parser, null);
+            XLSFile f = new XLSFile(this.parser);
+            
             f.createScoreTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color), teamno);
+            
+            if (team != null) {
+                f.createMatchTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color));
+            }
+            
             f.saveXLSFile();
             
         }
         
         if (topdf) {
             
-            PDFFile pdf = new PDFFile(this.parser, null);
+            PDFFile pdf = new PDFFile(this.parser);
             pdf.createScoreTable(oddrow_color, title_bg_color, title_font_color, teamno);
+            
+            if (team != null) {
+                pdf.createMatchTable(oddrow_color, title_bg_color, title_font_color);
+            }
+            
             pdf.closeFile();
             
         }

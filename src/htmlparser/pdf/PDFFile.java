@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import htmlparser.parser.Match;
 import htmlparser.parser.Parser;
 import htmlparser.parser.Team;
 import java.awt.Color;
@@ -28,18 +29,16 @@ public class PDFFile {
     
     private Parser parser;
     private Document document;
-    private String team;
     private boolean opened;
     private final String[] shColNms = {"Pořadí", "Tým", "Zápasů", "+", "0", "-", "Skóre", "Body"};
+    private final String[] mhColNms = {"Domácí", "Hosté", "Termín", "Den", "Hřiště"};
     private BaseFont fonttype;
     
-    public PDFFile(Parser parser, String team) {
+    public PDFFile(Parser parser) {
         
         this.parser = parser;
         this.document = new Document();
         
-        this.team = team;
-       
         try {
             
             PdfWriter.getInstance(this.document, new FileOutputStream(this.parser.getCompetitionName() + ".pdf"));
@@ -147,13 +146,97 @@ public class PDFFile {
                 table.setWidths(widths);
                 
                 this.document.add(table);
-                this.document.newPage();
                 
             } catch (DocumentException ex) {
                 System.out.println("Content exception");
             }
             
         }
+    }
+    
+    public void createMatchTable(Color oddrow_color, Color title_bg_color, Color title_font_color) {
+        
+        if (this.opened) {
+            
+            this.document.newPage();
+            
+            int columnNumber = 0;
+            for (String s: this.parser.getMatches().get(0).getData()) {
+
+                columnNumber++;
+
+            }
+            
+            PdfPTable table = new PdfPTable(columnNumber);
+            
+            Font f = new Font(this.fonttype, 13);
+            
+            
+            int row = 1;
+            
+            Font headline = new Font(f);
+            headline.setStyle("bold");
+            headline.setSize(16);
+            headline.setColor(new BaseColor(title_bg_color.getRGB()));
+            
+            PdfPCell headcell = new PdfPCell(new Paragraph(this.parser.getTeamName(), headline));
+            headcell.setColspan(columnNumber);
+            headcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(headcell);
+            
+            
+            Font title = new Font(f);
+            title.setStyle("bold");
+            title.setColor(new BaseColor(title_font_color.getRGB()));
+            
+            for (String s: this.mhColNms) {
+                
+                PdfPCell cell = new PdfPCell(new Paragraph(s, title));
+                cell.setBackgroundColor(new BaseColor(title_bg_color.getRGB()));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                
+                table.addCell(cell);
+            }
+            
+            row++;
+            
+    
+            
+            for (Match t: this.parser.getMatches()) {
+                
+                
+                for (String s: t.getData()) {
+                    
+                    PdfPCell cell = new PdfPCell(new Paragraph(s, f));
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    
+                    
+                    if (row % 2 == 0) {
+                        cell.setBackgroundColor(new BaseColor(oddrow_color.getRGB()));
+                    }
+                    
+                    table.addCell(cell);
+                    
+                }
+                
+                row++;
+                
+                               
+            }
+            
+            
+            try {
+                float[] widths = {26f, 26f, 20f, 8f, 20f};
+                table.setWidths(widths);
+                
+                this.document.add(table);
+                
+            } catch (DocumentException ex) {
+                
+            }
+            
+        }
+        
     }
     
     public void closeFile() {

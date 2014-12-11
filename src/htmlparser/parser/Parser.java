@@ -7,6 +7,7 @@ package htmlparser.parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Jsoup;
@@ -22,14 +23,19 @@ public class Parser {
     
     private Elements data;
     private ArrayList<Team> teams;
+    private ArrayList<Match> matches;
     private String competition_name;
+    private String team_name;
+    private String url;
     
     public Parser(String url) {
         
         Document doc = null;
         
+        this.url = url;
+        
         try {
-            doc = Jsoup.connect(url).get();
+            doc = Jsoup.connect(this.url).get();
         } catch (IOException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +46,7 @@ public class Parser {
         this.data = this.cleanPage(doc);
         
         this.teams = new ArrayList<>();
-        
+        this.matches = new ArrayList<>();
     }
     
     private Elements cleanPage(Document doc) {
@@ -52,17 +58,17 @@ public class Parser {
         
         content = doc.select("table[border=0][cellspacing=0][cellpadding=1][width=470]").get(1);
 
-        Elements data = content.getElementsByTag("tr");
+        Elements datas = content.getElementsByTag("tr");
         for (int i = 0; i < 3; i++)
-            data.remove(0);
+            datas.remove(0);
         
-        Elements emptylines = data.select("tr[bgcolor=#aaaaaa]");
+        Elements emptylines = datas.select("tr[bgcolor=#aaaaaa]");
         
         for (Element o: emptylines) {
-            data.remove(o);
+            datas.remove(o);
         }
         
-        return data;
+        return datas;
     }
     
     public void createTeams() {
@@ -91,9 +97,88 @@ public class Parser {
         
     }
     
+    
+    public void createMatches(String team) {
+        
+        this.team_name = team;
+        
+        this.matches = new ArrayList<>();
+        
+        Document doc = null;
+        
+        try {
+            doc = Jsoup.connect(this.url + "&show=Los").get();
+        } catch (IOException ex) {
+            Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (doc != null) {
+            
+            Elements content = doc.select("table[border=0][cellspacing=0][cellpadding=1][width=470]");
+        
+            List<Elements> tables = new ArrayList<>();
+
+            for (Element e: content) {
+
+                tables.add(e.getElementsByTag("tr"));
+
+            }
+
+            for (Elements t: tables) {
+                t.remove(0);
+                t.remove(0);
+                
+                Elements emptylines = t.select("tr[bgcolor=#aaaaaa]");
+                
+                for (Element o: emptylines) {
+                t.remove(o);
+                }
+
+                for (Element e: t) {
+                    Elements cells = e.getElementsByTag("td");
+                    cells.remove(0);
+
+                    if (cells.get(0).text().equals(team) || cells.get(1).text().equals(team)) {
+                        
+                        ArrayList<String> matchdata = new ArrayList<>();
+                        
+                        for (Element cell: cells) {
+                            
+                            matchdata.add(cell.text());
+                            
+                        }
+                        
+                        Match m = new Match(matchdata);
+                        this.matches.add(m);
+                        System.out.println(m);
+                        break;
+                    }
+
+                }
+                
+            }
+            
+            
+                        
+        }
+        
+    }
+    
     public ArrayList<Team> getTeams() {
         
         return this.teams;
+        
+    }
+    
+    public ArrayList<Match> getMatches() {
+        
+        return this.matches;
+        
+    }
+    
+    public String getTeamName() {
+        
+        return this.team_name;
         
     }
     

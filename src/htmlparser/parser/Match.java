@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author Tom
  */
-public class Team {
+public class Match {
     private ArrayList<String> data;
     
     
-    public Team(ArrayList<String> data) {
+    public Match(ArrayList<String> data) {
         
         this.data = data;
     }

@@ -35,8 +35,11 @@ public class View extends javax.swing.JFrame {
         this.color3Label.setVisible(false);
         this.excelBox.setVisible(false);
         this.pdfBox.setVisible(false);
+        this.matchBox.setVisible(false);
+        this.matchCheck.setVisible(false);
         
         this.teamsBox.setEnabled(false);
+        this.matchBox.setEnabled(false);
         this.saveButton.setEnabled(false);
     }
 
@@ -63,6 +66,8 @@ public class View extends javax.swing.JFrame {
         color3Label = new javax.swing.JLabel();
         excelBox = new javax.swing.JCheckBox();
         pdfBox = new javax.swing.JCheckBox();
+        matchCheck = new javax.swing.JCheckBox();
+        matchBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -124,12 +129,15 @@ public class View extends javax.swing.JFrame {
 
         colorsLabel.setText("Choose colors:");
 
+        color1Label.setBackground(new java.awt.Color(75, 195, 248));
         color1Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color1Label.setOpaque(true);
 
+        color2Label.setBackground(new java.awt.Color(38, 169, 247));
         color2Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color2Label.setOpaque(true);
 
+        color3Label.setBackground(new java.awt.Color(202, 65, 47));
         color3Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color3Label.setOpaque(true);
 
@@ -147,6 +155,15 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        matchCheck.setText("Table with matches of a team");
+        matchCheck.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                matchCheckItemStateChanged(evt);
+            }
+        });
+
+        matchBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empty" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,8 +172,13 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(matchCheck)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(font)
@@ -200,7 +222,12 @@ public class View extends javax.swing.JFrame {
                     .addComponent(colorsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(matchCheck)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(color1)
@@ -215,7 +242,7 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excelBox)
                     .addComponent(pdfBox)
@@ -227,7 +254,7 @@ public class View extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void urlSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urlSubmitActionPerformed
-        this.controller.getURL(this.urlField.getText());
+        this.controller.setURL(this.urlField.getText());
     }//GEN-LAST:event_urlSubmitActionPerformed
 
     private void urlFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_urlFieldMouseClicked
@@ -246,6 +273,7 @@ public class View extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         
         String selected = null;
+        String matches = null;
         
         if (this.teamHighlight.isSelected()) {
             
@@ -253,14 +281,20 @@ public class View extends javax.swing.JFrame {
             
         }
         
+        if (this.matchCheck.isSelected()) {
+            
+            matches = (String) this.matchBox.getSelectedItem();
+            
+        }
+        
         if (this.excelBox.isSelected() && this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, true, true);
+            this.controller.saveFile(selected, true, true, matches);
         }
         else if (this.excelBox.isSelected() && !this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, true, false);
+            this.controller.saveFile(selected, true, false, matches);
         }
         else if (!this.excelBox.isSelected() && this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, false, true);
+            this.controller.saveFile(selected, false, true, matches);
         }
         
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -312,6 +346,10 @@ public class View extends javax.swing.JFrame {
             this.saveButton.setEnabled(false);
         }
     }//GEN-LAST:event_pdfBoxActionPerformed
+
+    private void matchCheckItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_matchCheckItemStateChanged
+        this.matchBox.setEnabled(!this.matchBox.isEnabled());
+    }//GEN-LAST:event_matchCheckItemStateChanged
     
     public void urlSuccess() {
         this.teamHighlight.setVisible(true);
@@ -326,11 +364,15 @@ public class View extends javax.swing.JFrame {
         this.color3Label.setVisible(true);
         this.excelBox.setVisible(true);
         this.pdfBox.setVisible(true);
+        this.matchBox.setVisible(true);
+        this.matchCheck.setVisible(true);
     }
     
     public void fillTeams(ArrayList<String> teams) {
         ComboBoxData model = new ComboBoxData(teams);
+        ComboBoxData modelmatches = new ComboBoxData (teams);
         this.teamsBox.setModel(model);
+        this.matchBox.setModel(modelmatches);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -342,6 +384,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel colorsLabel;
     private javax.swing.JCheckBox excelBox;
     private javax.swing.JButton font;
+    private javax.swing.JComboBox matchBox;
+    private javax.swing.JCheckBox matchCheck;
     private javax.swing.JCheckBox pdfBox;
     private javax.swing.JButton saveButton;
     private javax.swing.JCheckBox teamHighlight;
