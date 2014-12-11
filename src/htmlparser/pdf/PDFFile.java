@@ -11,6 +11,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -30,6 +31,7 @@ public class PDFFile {
     private String team;
     private boolean opened;
     private final String[] shColNms = {"Pořadí", "Tým", "Zápasů", "+", "0", "-", "Skóre", "Body"};
+    private BaseFont fonttype;
     
     public PDFFile(Parser parser, String team) {
         
@@ -42,6 +44,7 @@ public class PDFFile {
             
             PdfWriter.getInstance(this.document, new FileOutputStream(this.parser.getCompetitionName() + ".pdf"));
             this.document.open();
+            this.fonttype = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.NOT_EMBEDDED);
             this.opened = true;
             
         } catch (Exception ex) {
@@ -61,7 +64,7 @@ public class PDFFile {
             
             PdfPTable table = new PdfPTable(columnNumber + 1);
             
-            Font f = new Font(Font.FontFamily.HELVETICA, 13);
+            Font f = new Font(this.fonttype, 13);
             
             
             int row = 1;
@@ -147,7 +150,7 @@ public class PDFFile {
                 this.document.newPage();
                 
             } catch (DocumentException ex) {
-                
+                System.out.println("Content exception");
             }
             
         }
