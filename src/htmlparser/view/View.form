@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Tabulky sout&#x11b;&#x17e;&#xed; a z&#xe1;pas&#x16f;"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -27,8 +28,18 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="excelBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pdfBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="teamHighlight" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="matchCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
@@ -37,44 +48,48 @@
                                   <Component id="matchBox" min="-2" pref="129" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="font" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="color1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="color2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="color1Label" min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="color2Label" min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="color3Label" min="-2" pref="18" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="urlField" min="-2" pref="321" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="fileNameLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="urlSubmit" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="teamHighlight" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                              <Component id="colorsLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="excelBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="pdfBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="fileName" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="colorsLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="131" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="font" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="color1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="color2" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="color1Label" min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="color2Label" min="-2" pref="18" max="-2" attributes="0"/>
+                                          <Component id="color3Label" min="-2" pref="18" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="copyrightLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="urlField" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="urlSubmit" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -89,32 +104,31 @@
                   <Component id="urlSubmit" pref="31" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="teamHighlight" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="colorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="teamHighlight" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="teamsBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="matchCheck" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="matchBox" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="colorsLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="color1" min="-2" max="-2" attributes="0"/>
                           <Component id="color1Label" min="-2" pref="18" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="color2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="font" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="color2Label" min="-2" pref="18" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="color3Label" min="-2" pref="18" max="-2" attributes="0"/>
@@ -122,13 +136,19 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="77" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="fileNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fileName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="excelBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pdfBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="copyrightLabel" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,7 +159,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Enter URL"/>
+        <Property name="text" type="java.lang.String" value="Klikni a vlo&#x17e; odkaz na tabulku sout&#x11b;&#x17e;e z fotbal.cz"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="urlFieldMouseClicked"/>
@@ -158,7 +178,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="teamHighlight">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Highlight a team"/>
+        <Property name="text" type="java.lang.String" value="Zv&#xfd;raznit t&#xfd;m"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teamHighlightActionPerformed"/>
@@ -168,7 +188,7 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Empty"/>
+            <StringItem index="0" value="&#x17d;&#xe1;dn&#xfd; t&#xfd;m nenalezen"/>
           </StringArray>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
@@ -179,7 +199,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="SAVE"/>
+        <Property name="text" type="java.lang.String" value="ULO&#x17d;IT"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
@@ -187,7 +207,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="color1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Odd row"/>
+        <Property name="text" type="java.lang.String" value="St&#x159;&#xed;dav&#xe9; pozad&#xed;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="color1ActionPerformed"/>
@@ -195,7 +215,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="color2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Titles background"/>
+        <Property name="text" type="java.lang.String" value="Pozad&#xed; n&#xe1;zv&#x16f; sloupc&#x16f;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="color2ActionPerformed"/>
@@ -203,7 +223,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="font">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Titles font"/>
+        <Property name="text" type="java.lang.String" value="P&#xed;smo n&#xe1;zv&#x16f; sloupc&#x16f;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fontActionPerformed"/>
@@ -211,7 +231,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="colorsLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Choose colors:"/>
+        <Property name="text" type="java.lang.String" value="Vyber barvy:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="color1Label">
@@ -255,7 +275,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="excelBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save as Excel"/>
+        <Property name="text" type="java.lang.String" value="Ulo&#x17e;it jako tabulku v Excelu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excelBoxActionPerformed"/>
@@ -263,7 +283,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="pdfBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save as PDF"/>
+        <Property name="text" type="java.lang.String" value="Ulo&#x17e;it jako PDF"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pdfBoxActionPerformed"/>
@@ -271,7 +291,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="matchCheck">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Table with matches of a team"/>
+        <Property name="text" type="java.lang.String" value="Vytvo&#x159;it tabulku z&#xe1;pas&#x16f; pro konkr&#xe9;tn&#xed; t&#xfd;m"/>
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="matchCheckItemStateChanged"/>
@@ -281,9 +301,30 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Empty"/>
+            <StringItem index="0" value="&#x17d;&#xe1;dn&#xfd; t&#xfd;m nenalezen"/>
           </StringArray>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="copyrightLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Copyright &#xa9; Tom&#xe1;&#x161; Panoc"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fileNameLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#xe1;zev v&#xfd;sledn&#xe9;ho souboru:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fileName">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="33" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="FileName"/>
       </Properties>
     </Component>
   </SubComponents>

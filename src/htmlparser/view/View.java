@@ -37,6 +37,8 @@ public class View extends javax.swing.JFrame {
         this.pdfBox.setVisible(false);
         this.matchBox.setVisible(false);
         this.matchCheck.setVisible(false);
+        this.fileNameLabel.setVisible(false);
+        this.fileName.setVisible(false);
         
         this.teamsBox.setEnabled(false);
         this.matchBox.setEnabled(false);
@@ -68,12 +70,16 @@ public class View extends javax.swing.JFrame {
         pdfBox = new javax.swing.JCheckBox();
         matchCheck = new javax.swing.JCheckBox();
         matchBox = new javax.swing.JComboBox();
+        copyrightLabel = new javax.swing.JLabel();
+        fileNameLabel = new javax.swing.JLabel();
+        fileName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tabulky soutěží a zápasů");
         setResizable(false);
 
         urlField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        urlField.setText("Enter URL");
+        urlField.setText("Klikni a vlož odkaz na tabulku soutěže z fotbal.cz");
         urlField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 urlFieldMouseClicked(evt);
@@ -88,46 +94,46 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        teamHighlight.setText("Highlight a team");
+        teamHighlight.setText("Zvýraznit tým");
         teamHighlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 teamHighlightActionPerformed(evt);
             }
         });
 
-        teamsBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empty" }));
+        teamsBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Žádný tým nenalezen" }));
         teamsBox.setFocusable(false);
 
         saveButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        saveButton.setText("SAVE");
+        saveButton.setText("ULOŽIT");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
 
-        color1.setText("Odd row");
+        color1.setText("Střídavé pozadí");
         color1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 color1ActionPerformed(evt);
             }
         });
 
-        color2.setText("Titles background");
+        color2.setText("Pozadí názvů sloupců");
         color2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 color2ActionPerformed(evt);
             }
         });
 
-        font.setText("Titles font");
+        font.setText("Písmo názvů sloupců");
         font.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fontActionPerformed(evt);
             }
         });
 
-        colorsLabel.setText("Choose colors:");
+        colorsLabel.setText("Vyber barvy:");
 
         color1Label.setBackground(new java.awt.Color(75, 195, 248));
         color1Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -141,28 +147,36 @@ public class View extends javax.swing.JFrame {
         color3Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color3Label.setOpaque(true);
 
-        excelBox.setText("Save as Excel");
+        excelBox.setText("Uložit jako tabulku v Excelu");
         excelBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excelBoxActionPerformed(evt);
             }
         });
 
-        pdfBox.setText("Save as PDF");
+        pdfBox.setText("Uložit jako PDF");
         pdfBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pdfBoxActionPerformed(evt);
             }
         });
 
-        matchCheck.setText("Table with matches of a team");
+        matchCheck.setText("Vytvořit tabulku zápasů pro konkrétní tým");
         matchCheck.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 matchCheckItemStateChanged(evt);
             }
         });
 
-        matchBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empty" }));
+        matchBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Žádný tým nenalezen" }));
+
+        copyrightLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        copyrightLabel.setText("Copyright © Tomáš Panoc");
+
+        fileNameLabel.setText("Název výsledného souboru:");
+
+        fileName.setForeground(new java.awt.Color(0, 51, 255));
+        fileName.setText("FileName");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,42 +186,53 @@ public class View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(excelBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pdfBox)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(saveButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(teamHighlight)
                             .addComponent(matchCheck)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(font)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(color1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(color2)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(urlField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(fileNameLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(urlSubmit))
+                                .addComponent(fileName)
+                                .addGap(35, 35, 35)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(teamHighlight)
-                                .addGap(117, 117, 117)
-                                .addComponent(colorsLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(excelBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pdfBox)
-                                .addGap(18, 18, 18)
-                                .addComponent(saveButton)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(colorsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(font)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(color1, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(color2)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(copyrightLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(urlField)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(urlSubmit)
+                        .addGap(47, 47, 47))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,18 +242,18 @@ public class View extends javax.swing.JFrame {
                     .addComponent(urlField)
                     .addComponent(urlSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(teamHighlight)
-                    .addComponent(colorsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(teamHighlight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(matchCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(colorsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(color1)
                             .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,12 +267,17 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileNameLabel)
+                    .addComponent(fileName))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excelBox)
                     .addComponent(pdfBox)
                     .addComponent(saveButton))
-                .addGap(29, 29, 29))
+                .addGap(19, 19, 19)
+                .addComponent(copyrightLabel))
         );
 
         pack();
@@ -301,7 +331,7 @@ public class View extends javax.swing.JFrame {
 
     private void color1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color1ActionPerformed
         
-        Color c = JColorChooser.showDialog(null, "Choose a Color", this.getForeground());
+        Color c = JColorChooser.showDialog(null, "Vyber barvu", this.getForeground());
         if (c != null) {
             this.controller.setColor1(c);
             this.color1Label.setBackground(c);
@@ -311,7 +341,7 @@ public class View extends javax.swing.JFrame {
 
     private void color2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_color2ActionPerformed
         
-        Color c = JColorChooser.showDialog(null, "Choose a Color", this.getForeground());
+        Color c = JColorChooser.showDialog(null, "Vyber barvu", this.getForeground());
         if (c != null) {
             this.controller.setColor2(c);
             this.color2Label.setBackground(c);
@@ -366,6 +396,12 @@ public class View extends javax.swing.JFrame {
         this.pdfBox.setVisible(true);
         this.matchBox.setVisible(true);
         this.matchCheck.setVisible(true);
+        this.fileNameLabel.setVisible(true);
+        this.fileName.setVisible(true);
+    }
+    
+    public void displayFileName(String filename) {
+        this.fileName.setText(filename);
     }
     
     public void fillTeams(ArrayList<String> teams) {
@@ -382,7 +418,10 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel color2Label;
     private javax.swing.JLabel color3Label;
     private javax.swing.JLabel colorsLabel;
+    private javax.swing.JLabel copyrightLabel;
     private javax.swing.JCheckBox excelBox;
+    private javax.swing.JLabel fileName;
+    private javax.swing.JLabel fileNameLabel;
     private javax.swing.JButton font;
     private javax.swing.JComboBox matchBox;
     private javax.swing.JCheckBox matchCheck;

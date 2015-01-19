@@ -54,6 +54,7 @@ public class Controller {
             
             this.view.fillTeams(this.teams);
             this.view.urlSuccess();
+            this.view.displayFileName(this.parser.getCompetitionName());
             
         }
         
