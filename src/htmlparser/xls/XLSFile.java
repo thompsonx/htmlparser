@@ -11,6 +11,7 @@ import htmlparser.parser.Team;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
@@ -37,14 +38,15 @@ public class XLSFile {
     private Sheet scoresheet;
     private Sheet matchsheet;
     private Parser parser;
+    private String path;
     private final String[] shColNms = {"Pořadí", "Tým", "Zápasů", "+", "0", "-", "Skóre", "Body"};
     private final String[] mhColNms = {"Domácí", "Hosté", "Termín", "Den", "Hřiště"};
     
-    public XLSFile(Parser parser) {
+    public XLSFile(Parser parser, String destination) {
         
         this.parser = parser;
         this.excelfile = new XSSFWorkbook();
-        
+        this.path = destination;
         
         this.scoresheet = null;
         this.matchsheet = null;
@@ -52,6 +54,35 @@ public class XLSFile {
     }
     
     public void createScoreTable(XSSFColor oddrow_color, XSSFColor title_bg_color, XSSFColor title_font_color, int highlight) {
+        
+        byte[] white = new byte[3];
+        white[0] = 0;
+        white[1] = 0;
+        white[2] = 0;
+        
+        byte[] black = new byte[3];
+        black[0] = black[1] = black[2] = -1;
+        
+        if (Arrays.equals(oddrow_color.getRgb(), white)) {
+            oddrow_color.setRgb(black);
+        }
+        else if (Arrays.equals(oddrow_color.getRgb(), black)) {
+            oddrow_color.setRgb(white);
+        }
+        if (Arrays.equals(title_bg_color.getRgb(), white)) {
+            title_bg_color.setRgb(black);
+        }
+        else if (Arrays.equals(title_bg_color.getRgb(), black)) {
+            title_bg_color.setRgb(white);
+        }
+        if (Arrays.equals(title_font_color.getRgb(), white)) {
+            title_font_color.setRgb(black);
+        }
+        else if (Arrays.equals(title_font_color.getRgb(), black)) {
+            title_font_color.setRgb(white);
+        }
+        
+        System.out.println(Arrays.toString(title_font_color.getRgb()));
         
         String sheetname = WorkbookUtil.createSafeSheetName(this.parser.getCompetitionName());
         this.scoresheet = this.excelfile.createSheet(sheetname);
@@ -178,6 +209,34 @@ public class XLSFile {
     
     public void createMatchTable(XSSFColor oddrow_color, XSSFColor title_bg_color, XSSFColor title_font_color) {
         
+        byte[] white = new byte[3];
+        white[0] = 0;
+        white[1] = 0;
+        white[2] = 0;
+        
+        byte[] black = new byte[3];
+        black[0] = black[1] = black[2] = -1;
+        
+        if (Arrays.equals(oddrow_color.getRgb(), white)) {
+            oddrow_color.setRgb(black);
+        }
+        else if (Arrays.equals(oddrow_color.getRgb(), black)) {
+            oddrow_color.setRgb(white);
+        }
+        if (Arrays.equals(title_bg_color.getRgb(), white)) {
+            title_bg_color.setRgb(black);
+        }
+        else if (Arrays.equals(title_bg_color.getRgb(), black)) {
+            title_bg_color.setRgb(white);
+        }
+        if (Arrays.equals(title_font_color.getRgb(), white)) {
+            title_font_color.setRgb(black);
+        }
+        else if (Arrays.equals(title_font_color.getRgb(), black)) {
+            title_font_color.setRgb(white);
+        }
+        
+        
         String sheetname = WorkbookUtil.createSafeSheetName(this.parser.getTeamName());
         this.matchsheet = this.excelfile.createSheet(sheetname);
         
@@ -281,7 +340,7 @@ public class XLSFile {
         FileOutputStream output = null;
         
         try {
-            output = new FileOutputStream(this.parser.getCompetitionName() + ".xlsx");
+            output = new FileOutputStream(this.path + "\\" + this.parser.getCompetitionName() + ".xlsx");
         } catch (FileNotFoundException ex) {
             
         }

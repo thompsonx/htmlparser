@@ -32,30 +32,19 @@
                       <Component id="excelBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="pdfBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="32767" attributes="0"/>
-                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="teamHighlight" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="matchCheck" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="teamsBox" min="-2" pref="130" max="-2" attributes="0"/>
                                   <Component id="matchBox" min="-2" pref="129" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="fileNameLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="fileName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="colorsLabel" min="-2" max="-2" attributes="0"/>
@@ -79,19 +68,27 @@
                                           <Component id="color3Label" min="-2" pref="18" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="copyrightLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveButton" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="urlField" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="competitionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="compName" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="urlField" min="-2" pref="355" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="urlSubmit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="copyrightLabel" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,12 +97,17 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="urlField" max="32767" attributes="0"/>
-                  <Component id="urlSubmit" pref="31" max="32767" attributes="0"/>
+                  <Component id="urlSubmit" max="32767" attributes="0"/>
+                  <Component id="urlField" pref="31" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="competitionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="compName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="teamHighlight" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="teamsBox" min="-2" max="-2" attributes="0"/>
@@ -114,7 +116,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="matchBox" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="colorsLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -136,18 +138,13 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fileNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fileName" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="excelBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pdfBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
               <Component id="copyrightLabel" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -237,7 +234,7 @@
     <Component class="javax.swing.JLabel" name="color1Label">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f8" green="c3" red="4b" type="rgb"/>
+          <Color blue="f1" green="d9" red="c5" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -250,7 +247,7 @@
     <Component class="javax.swing.JLabel" name="color2Label">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f7" green="a9" red="26" type="rgb"/>
+          <Color blue="d5" green="8d" red="53" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -263,7 +260,7 @@
     <Component class="javax.swing.JLabel" name="color3Label">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="2f" green="41" red="ca" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -314,17 +311,23 @@
         <Property name="text" type="java.lang.String" value="Copyright &#xa9; Tom&#xe1;&#x161; Panoc"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="fileNameLabel">
+    <Component class="javax.swing.JLabel" name="competitionLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="N&#xe1;zev v&#xfd;sledn&#xe9;ho souboru:"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Sout&#x11b;&#x17e;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="fileName">
+    <Component class="javax.swing.JLabel" name="compName">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="FileName"/>
+        <Property name="text" type="java.lang.String" value="Competition name"/>
       </Properties>
     </Component>
   </SubComponents>

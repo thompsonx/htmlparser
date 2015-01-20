@@ -34,14 +34,14 @@ public class PDFFile {
     private final String[] mhColNms = {"Domácí", "Hosté", "Termín", "Den", "Hřiště"};
     private BaseFont fonttype;
     
-    public PDFFile(Parser parser) {
+    public PDFFile(Parser parser, String destination) {
         
         this.parser = parser;
         this.document = new Document();
         
         try {
             
-            PdfWriter.getInstance(this.document, new FileOutputStream(this.parser.getCompetitionName() + ".pdf"));
+            PdfWriter.getInstance(this.document, new FileOutputStream(destination + "\\" + this.parser.getCompetitionName() + ".pdf"));
             this.document.open();
             this.fonttype = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.NOT_EMBEDDED);
             this.opened = true;

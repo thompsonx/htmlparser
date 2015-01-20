@@ -7,8 +7,10 @@ package htmlparser.view;
 
 import htlmparser.control.Controller;
 import java.awt.Color;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -17,6 +19,7 @@ import javax.swing.JColorChooser;
 public class View extends javax.swing.JFrame {
     
     private Controller controller;
+    private JFileChooser dirChoose;
     
     public View(Controller c) {
         initComponents();
@@ -37,12 +40,17 @@ public class View extends javax.swing.JFrame {
         this.pdfBox.setVisible(false);
         this.matchBox.setVisible(false);
         this.matchCheck.setVisible(false);
-        this.fileNameLabel.setVisible(false);
-        this.fileName.setVisible(false);
+        this.competitionLabel.setVisible(false);
+        this.compName.setVisible(false);
         
         this.teamsBox.setEnabled(false);
         this.matchBox.setEnabled(false);
         this.saveButton.setEnabled(false);
+        
+        this.dirChoose = new JFileChooser(new File("."));
+        this.dirChoose.setDialogTitle("Vyber místo pro uložení");
+        this.dirChoose.setAcceptAllFileFilterUsed(false);
+        this.dirChoose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }
 
     /**
@@ -71,8 +79,8 @@ public class View extends javax.swing.JFrame {
         matchCheck = new javax.swing.JCheckBox();
         matchBox = new javax.swing.JComboBox();
         copyrightLabel = new javax.swing.JLabel();
-        fileNameLabel = new javax.swing.JLabel();
-        fileName = new javax.swing.JLabel();
+        competitionLabel = new javax.swing.JLabel();
+        compName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabulky soutěží a zápasů");
@@ -135,15 +143,15 @@ public class View extends javax.swing.JFrame {
 
         colorsLabel.setText("Vyber barvy:");
 
-        color1Label.setBackground(new java.awt.Color(75, 195, 248));
+        color1Label.setBackground(new java.awt.Color(197, 217, 241));
         color1Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color1Label.setOpaque(true);
 
-        color2Label.setBackground(new java.awt.Color(38, 169, 247));
+        color2Label.setBackground(new java.awt.Color(83, 141, 213));
         color2Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color2Label.setOpaque(true);
 
-        color3Label.setBackground(new java.awt.Color(202, 65, 47));
+        color3Label.setBackground(new java.awt.Color(255, 255, 255));
         color3Label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         color3Label.setOpaque(true);
 
@@ -173,10 +181,12 @@ public class View extends javax.swing.JFrame {
         copyrightLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         copyrightLabel.setText("Copyright © Tomáš Panoc");
 
-        fileNameLabel.setText("Název výsledného souboru:");
+        competitionLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        competitionLabel.setText("Soutěž:");
 
-        fileName.setForeground(new java.awt.Color(0, 51, 255));
-        fileName.setText("FileName");
+        compName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        compName.setForeground(new java.awt.Color(0, 51, 255));
+        compName.setText("Competition name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,12 +198,8 @@ public class View extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(excelBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pdfBox)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(saveButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pdfBox))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(teamHighlight)
                             .addComponent(matchCheck)
@@ -201,13 +207,7 @@ public class View extends javax.swing.JFrame {
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(teamsBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(fileNameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fileName)
-                                .addGap(35, 35, 35)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(matchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(colorsLabel)
@@ -226,21 +226,31 @@ public class View extends javax.swing.JFrame {
                                             .addComponent(color1Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(copyrightLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(urlField)
+                                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(competitionLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(urlSubmit)
-                        .addGap(47, 47, 47))))
+                        .addComponent(compName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(urlField, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(urlSubmit)))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(copyrightLabel))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(urlField)
-                    .addComponent(urlSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(urlSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(urlField, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(competitionLabel)
+                    .addComponent(compName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -267,16 +277,12 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(color2Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(color3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fileNameLabel)
-                    .addComponent(fileName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excelBox)
                     .addComponent(pdfBox)
                     .addComponent(saveButton))
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(copyrightLabel))
         );
 
@@ -318,13 +324,22 @@ public class View extends javax.swing.JFrame {
         }
         
         if (this.excelBox.isSelected() && this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, true, true, matches);
+            this.dirChoose.showOpenDialog(this);
+            File dir = this.dirChoose.getSelectedFile();
+            System.out.println(dir.getPath());
+            this.controller.saveFile(selected, true, true, matches, dir.getPath());
         }
         else if (this.excelBox.isSelected() && !this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, true, false, matches);
+            this.dirChoose.showOpenDialog(this);
+            File dir = this.dirChoose.getSelectedFile();
+            System.out.println(dir.getPath());
+            this.controller.saveFile(selected, true, false, matches, dir.getPath());
         }
         else if (!this.excelBox.isSelected() && this.pdfBox.isSelected()) {
-            this.controller.saveFile(selected, false, true, matches);
+            this.dirChoose.showOpenDialog(this);
+            File dir = this.dirChoose.getSelectedFile();
+            System.out.println(dir.getPath());
+            this.controller.saveFile(selected, false, true, matches, dir.getPath());
         }
         
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -396,12 +411,12 @@ public class View extends javax.swing.JFrame {
         this.pdfBox.setVisible(true);
         this.matchBox.setVisible(true);
         this.matchCheck.setVisible(true);
-        this.fileNameLabel.setVisible(true);
-        this.fileName.setVisible(true);
+        this.competitionLabel.setVisible(true);
+        this.compName.setVisible(true);
     }
     
     public void displayFileName(String filename) {
-        this.fileName.setText(filename);
+        this.compName.setText(filename);
     }
     
     public void fillTeams(ArrayList<String> teams) {
@@ -418,10 +433,10 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel color2Label;
     private javax.swing.JLabel color3Label;
     private javax.swing.JLabel colorsLabel;
+    private javax.swing.JLabel compName;
+    private javax.swing.JLabel competitionLabel;
     private javax.swing.JLabel copyrightLabel;
     private javax.swing.JCheckBox excelBox;
-    private javax.swing.JLabel fileName;
-    private javax.swing.JLabel fileNameLabel;
     private javax.swing.JButton font;
     private javax.swing.JComboBox matchBox;
     private javax.swing.JCheckBox matchCheck;

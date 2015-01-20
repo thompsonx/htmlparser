@@ -27,9 +27,9 @@ public class Controller {
     
     public Controller() {
         
-        this.oddrow_color = new Color(75,195,248);
-        this.title_bg_color = new Color(38,169,247);
-        this.title_font_color = new Color(202,65,47);
+        this.oddrow_color = new Color(197,217,241);
+        this.title_bg_color = new Color(83,141,213);
+        this.title_font_color = new Color(255,255,255);
         
     }
     
@@ -60,7 +60,7 @@ public class Controller {
         
     }
     
-    public void saveFile(String highlight, boolean toxlsx, boolean topdf, String team) {
+    public void saveFile(String highlight, boolean toxlsx, boolean topdf, String team, String destination) {
 
         int teamno = -1;
         
@@ -81,7 +81,7 @@ public class Controller {
         
         if (toxlsx) {
             
-            XLSFile f = new XLSFile(this.parser);
+            XLSFile f = new XLSFile(this.parser, destination);
             
             f.createScoreTable(new XSSFColor(this.oddrow_color), new XSSFColor(this.title_bg_color), new XSSFColor(this.title_font_color), teamno);
             
@@ -95,7 +95,7 @@ public class Controller {
         
         if (topdf) {
             
-            PDFFile pdf = new PDFFile(this.parser);
+            PDFFile pdf = new PDFFile(this.parser, destination);
             pdf.createScoreTable(oddrow_color, title_bg_color, title_font_color, teamno);
             
             if (team != null) {
